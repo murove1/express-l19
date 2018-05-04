@@ -7,6 +7,7 @@ const { User } = require('../models/user');
 
 // list of controllers here
 const questions = require('../controllers/questions');
+const auth = require('../controllers/auth');
 
 // combine models ino one object
 const models = { Question, User };
@@ -16,6 +17,7 @@ const routersInit = config => {
 
   // register api points
   router.use('/questions', questions(models, { config }));
+  router.use('/auth', auth(models, { config }));
 
   // catch api all errors
   router.use(errorHandler);
