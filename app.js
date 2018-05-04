@@ -17,13 +17,17 @@ app.set('view engine', 'jade');
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public/build')));
 mongoManager.connect();
 
 // Authorization
 app.use(passport.initialize());
 
 app.use('/api/v1', api(config));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, './public/build/', 'index.html'));
+});
 
 
 // error handler
