@@ -3,12 +3,13 @@ const express = require('express');
 const { errorHandler } = require('../middleware');
 // list of models here
 const { Question } = require('../models/question');
+const { User } = require('../models/user');
 
 // list of controllers here
 const questions = require('../controllers/questions');
 
 // combine models ino one object
-const models = { Question };
+const models = { Question, User };
 
 const routersInit = config => {
   const router = express();
