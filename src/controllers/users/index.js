@@ -1,17 +1,16 @@
 const { Router: router } = require('express');
+const { authenticate } = require('../../middleware');
 
 const { get } = require('./get');
 const { list } = require('./list');
-const { create } = require('./create');
-const { update } = require('./update');
-const { remove } = require('./remove');
-const { answers } = require('./answers');
+const { getUserData } = require('./getUserData');
+
 
 /**
  * Provide api for questions
  *
  *
- * GET /api/v1/questions/ - List
+ * GET /api/v1/users/ - List
      @header
             Authorization: Bearer {token}
      @optionalQueryParameters
@@ -26,11 +25,8 @@ module.exports = (models, { config }) => {
   const api = router();
 
   api.get('/', list(models, { config }));
+  api.get('/my', authenticate, getUserData);
   api.get('/:_id', get(models, { config }));
-  api.get('/:_id/answers', answers(models, { config }));
-  api.post('/', create(models, { config }));
-  api.patch('/:_id', update(models, { config }));
-  api.delete('/:_id', remove(models, { config }));
 
   return api;
 };

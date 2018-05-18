@@ -1,7 +1,7 @@
 const _ = require('lodash');
 const { sendList } = require('../../middleware');
 
-const list = ({ Question }, { config }) => async (req, res, next) => {
+const list = ({ Vote }, { config }) => async (req, res, next) => {
   let { limit, skip, search } = req.query;
   skip = skip ? parseInt(skip, 10) : 0;
   limit = limit ? parseInt(limit, 10) : 100;
@@ -11,12 +11,12 @@ const list = ({ Question }, { config }) => async (req, res, next) => {
     if (search) {
       _.extend(query, { title: new RegExp(`${search}`, 'i') });
     }
-    const questions = await Question.find(query)
+    const votes = await Vote.find(query)
       .skip(skip)
       .limit(limit)
       .sort({ _id: -1 });
 
-    return sendList(res, { questions });
+    return sendList(res, { votes });
   } catch (error) {
     next(error);
   }

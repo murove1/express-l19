@@ -2,16 +2,16 @@ const _ = require('lodash');
 const { NotAcceptable } = require('rest-api-errors');
 const { sendCreated } = require('../../middleware');
 
-const create = ({ Question }, { config }) => async (req, res, next) => {
+const create = ({ Answer }, { config }) => async (req, res, next) => {
   try {
-    const question = new Question();
+    const answer = new Answer();
     if (!req.body.title) {
       throw new NotAcceptable(405, 'Should by title}');
     }
-    _.extend(question, req.body);
-    const saved = await question.save();
+    _.extend(answer, req.body);
+    await answer.save();
 
-    return sendCreated(res, { question });
+    return sendCreated(res, { answer });
   } catch (error) {
     next(error);
   }

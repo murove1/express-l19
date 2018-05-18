@@ -1,5 +1,20 @@
 const { errorHandler } = require('./error-handller');
 const { authenticate, generateAccessToken } = require('./auth');
-const { sendOne } = require('./requests-helpers');
+const {
+  sendOne,
+  sendList,
+  sendCreated,
+  sendUpdated,
+  sendDeleted
+} = require('./requests-helpers');
 
-module.exports = { errorHandler, sendOne, authenticate, generateAccessToken };
+module.exports = {
+  errorHandler,
+  sendOne,
+  sendList,
+  sendCreated,
+  sendUpdated,
+  sendDeleted,
+  authenticate,
+  generateAccessToken
+};
