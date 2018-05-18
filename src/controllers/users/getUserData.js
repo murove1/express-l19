@@ -1,9 +1,14 @@
 const { sendOne } = require('../../middleware');
 
-const getUserData = (req, res) => {
-  const user = req.user;
+const getUserData = ({ User }, { config }) => async (req, res, next) => {
+  const { id } = req.user;
 
-  return sendOne(res, { user });
+  try {
+    const user = await User.findOne({ _id: id });
+
+    return sendOne(res, { user });
+  } catch (error) {
+    next(error);
+  }
 };
-
 module.exports = { getUserData };

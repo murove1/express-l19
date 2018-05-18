@@ -5,7 +5,6 @@ const { get } = require('./get');
 const { list } = require('./list');
 const { getUserData } = require('./getUserData');
 
-
 /**
  * Provide api for questions
  *
@@ -25,7 +24,7 @@ module.exports = (models, { config }) => {
   const api = router();
 
   api.get('/', list(models, { config }));
-  api.get('/my', authenticate, getUserData);
+  api.get('/my', authenticate, getUserData(models, { config }));
   api.get('/:_id', get(models, { config }));
 
   return api;
