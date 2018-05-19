@@ -4,6 +4,7 @@ const {
   sendOne,
   sendList,
   sendCreated,
+  sendAccepted,
   sendUpdated,
   sendDeleted
 } = require('./requests-helpers');
@@ -13,6 +14,7 @@ module.exports = {
   sendOne,
   sendList,
   sendCreated,
+  sendAccepted,
   sendUpdated,
   sendDeleted,
   authenticate,
