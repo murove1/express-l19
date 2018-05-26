@@ -11,12 +11,12 @@ const list = ({ Answer }, { config }) => async (req, res, next) => {
     if (search) {
       _.extend(query, { title: new RegExp(`${search}`, 'i') });
     }
+    const count = await Answer.find(query).count();
     const answers = await Answer.find(query)
       .skip(skip)
-      .limit(limit)
-      .sort({ _id: -1 });
+      .limit(limit);
 
-    return sendList(res, { answers });
+    return sendList(res, { answers, count });
   } catch (error) {
     next(error);
   }
