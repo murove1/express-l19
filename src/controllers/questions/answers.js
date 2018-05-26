@@ -6,11 +6,10 @@ const answers = ({ Answer }, { config }) => async (req, res, next) => {
     let { limit, skip } = req.query;
     skip = skip ? parseInt(skip, 10) : 0;
     limit = limit ? parseInt(limit, 10) : 100;
-
     const query = { questionId: _id };
 
     const count = await Answer.find(query).count();
-    const questions = await Answer.find(query)
+    const answers = await Answer.find(query)
       .skip(skip)
       .limit(limit);
 
